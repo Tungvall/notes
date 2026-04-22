@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+    <title>Failed Successfully</title>
+    <style>
+        html {
+            background-color: #181818;
+        }
+
+        @media (max-width: 500px) {
+            .loading {
+                font-size: 1.2em;
+            }
+
+            .website {
+                letter-spacing: 0.2em; /* reduce spacing on small screens */
+            }
+        }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            border-top: 1px solid rgba(61, 255, 138, 1);
+            border-bottom: 1px solid rgb(197, 63, 63);
+            box-shadow:
+                    300px 0px 20px 5px #181818,
+                    -30px 0px 20px 5px #181818,
+                    0px -5px 10px -2px rgba(7, 255, 7, 0.438),
+                    0px 1px 0px 0px rgba(255, 1, 1, 0.37);
+
+            border-radius: 10px;
+            align-items: center;
+            padding: 30px 5px;
+            overflow: hidden;
+        }
+
+        img {
+            width: 350px;
+            border-radius: 8px;
+            border: 0px solid;
+        }
+
+        .loading {
+            font-size: 3em;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .line {
+            margin-bottom: 0px;
+        }
+
+        .website {
+            letter-spacing: 0.48em;
+            color: #ffffff;
+            text-shadow:
+                    0 0 4px rgba(141, 255, 255, 0.966),
+                    0 0 10px rgba(116, 240, 240, 0.966),
+                    0 0 18px rgba(143, 255, 255, 0.966);
+        }
+
+        .failed {
+            color: #ffffff;
+
+            text-shadow:
+                    0 0 5px #f76969,
+                    0 0 10px #e66363,
+                    0 0 20px #f76464;
+            font-size: 2.3em;
+        }
+
+        .success {
+            color: #ffffff;
+            text-shadow:
+                    0 0 5px #6fe69a,
+                    0 0 10px #69f09b,
+                    0 0 20px #78fabd;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="loading">
+        <div class="line website">NOTES</div>
+        <div class="line failed">FAILED</div>
+        <div class="line success">SUCCESSFULLY</div>
+    </div>
+    <div class="image">
+        <img src="image.png" />
+    </div>
+</div>
+</body>
+</html>
