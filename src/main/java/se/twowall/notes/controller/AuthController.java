@@ -2,7 +2,6 @@ package se.twowall.notes.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.core.Authentication;
 import se.twowall.notes.dto.*;
 import se.twowall.notes.service.AuthService;
 import se.twowall.notes.service.UserService;
@@ -31,12 +30,9 @@ public class AuthController {
         return userService.registerUser(request.getUsername(), request.getPassword());
     }
 
-    @GetMapping("/account")
-    public String getAccount(Authentication auth) {
-        return "Account for " + auth.getName();
+
+    @PatchMapping("/password/")
+    public boolean changePassword(@Valid @RequestBody PasswordChangeRequest request) {
+        return userService.changePassword(request);
     }
-
-
-
-
 }

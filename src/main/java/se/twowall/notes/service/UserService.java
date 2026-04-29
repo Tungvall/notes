@@ -1,11 +1,18 @@
 package se.twowall.notes.service;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.server.ResponseStatusException;
+import se.twowall.notes.dto.PasswordChangeRequest;
 import se.twowall.notes.dto.UserResponse;
 import se.twowall.notes.entity.User;
 import se.twowall.notes.exception.UsernameAlreadyExistsException;
 import se.twowall.notes.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 
 @Service
@@ -34,5 +41,24 @@ public class UserService {
         return new UserResponse((savedUser.getId()), savedUser.getUsername());
     }
 
+    public boolean changePassword(PasswordChangeRequest pwdChangRequest) {
+        if (pwdChangRequest.getOldPassword().equals(pwdChangRequest.getNewPassword())) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Passwords do not match");
+        }
 
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authentication required");
+        }
+
+        User user = userRepository.findByUsername(auth.getName())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        user.setPassword(bCrypt.encode(pwdChangRequest.getNewPassword()));
+        userRepository.save(user);
+
+        return true;
+    }
 }
