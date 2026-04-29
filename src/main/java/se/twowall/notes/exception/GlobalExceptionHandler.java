@@ -16,8 +16,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .body(Map.of(
-                        "error", ex.getMessage(),
-                        "status", 409
+                        "error", ex.getMessage()
 
                 ));
     }

@@ -7,6 +7,7 @@ import se.twowall.notes.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UserService {
 
@@ -23,10 +24,15 @@ public class UserService {
             System.out.println("User already exists");
             throw new UsernameAlreadyExistsException("User already exists");
         }
+
         String hashedPassword = bCrypt.encode(password);
+
         User user = new User(username, hashedPassword);
         User savedUser = userRepository.save(user);
+
         System.out.println("Registered user: " + savedUser.getUsername());
         return new UserResponse((savedUser.getId()), savedUser.getUsername());
     }
+
+
 }

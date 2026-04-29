@@ -1,9 +1,6 @@
 package se.twowall.notes.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 public class LoginRequest {
 
