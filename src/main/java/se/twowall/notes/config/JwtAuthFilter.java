@@ -18,7 +18,8 @@ import java.util.List;
 
 // https://www.geeksforgeeks.org/springboot/spring-boot-3-0-jwt-authentication-with-spring-security-using-mysql-database/
 public class JwtAuthFilter extends OncePerRequestFilter {
-    private final String SECRET_KEY = "SupermegahemligsupernyckelSomArMinst32TeckenLAng!!!";
+
+     private final String SECRET_KEY = "SupermegahemligsupernyckelSomArMinst32TeckenLAng!!!"; // oh no leak
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -27,10 +28,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-//        if (path.startsWith("/api/login") || path.startsWith("/api/register")) {
-//            chain.doFilter(request, response);
-//            return;
-//        }
+        if (path.startsWith("/api/login") || path.startsWith("/api/register")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         String header = request.getHeader("Authorization");
 
